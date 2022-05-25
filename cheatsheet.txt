@@ -12,9 +12,7 @@ npm install -g npm
 
 # init env
 
-npm init -y
-npm install --save-dev webpack-dev-server webpack webpack-cli html-webpack-plugin copy-webpack-plugin clean-webpack-plugin
-npm install --save pixi.js
+npm install
 
 # test web
 
