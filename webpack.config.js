@@ -19,7 +19,7 @@ module.exports = {
   ],
   mode: 'development',
   entry: {
-    main: './main.js',
+    main: './js/main.js',
   },
   output: {
     filename: 'cp-[name].js',
