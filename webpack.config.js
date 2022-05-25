@@ -26,5 +26,9 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
-  devtool: 'source-map'
+  devtool: 'source-map',
+  devServer: {
+    compress: true,
+    allowedHosts: ['.gitpod.io']
+  }
 };
