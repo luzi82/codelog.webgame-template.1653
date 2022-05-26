@@ -2,6 +2,8 @@ import * as PIXI from 'pixi.js';
 import * as lz_runtime from './lz/lz_runtime.js';
 import * as lz_game_object from './lz/lz_game_object.js';
 
+import HomeMenu from './game/home_menu/home_menu.js';
+
 const GAME_MAIN = {
 
   LOGIC_WIDTH:1280,
@@ -22,6 +24,10 @@ const GAME_MAIN = {
     // root game object
     self.runtime.rootGo = new lz_game_object.LzGameObject(self.runtime);
     self.app.stage.addChild(self.runtime.rootGo);
+
+    // home menu
+    var home_menu = new HomeMenu(self.runtime);
+    self.runtime.rootGo.addChild(home_menu);
 
     // window.addEventListener("resize",()=>{self.onresize();});
     // this.onresize();
