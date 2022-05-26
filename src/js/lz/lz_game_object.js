@@ -10,6 +10,9 @@ class LzGameObject extends PIXI.Container {
     super();
     this.runtime = runtime;
     this.uuid = uuidv4();
+    if(runtime==null){
+      console.error(`runtime==null, uuid=${this.uuid}`);
+    }
     if((typeof this.tick)=="function"){
       this.runtime.app.ticker.add(self.tick);
     }
