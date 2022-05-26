@@ -17,17 +17,12 @@ const GAME_MAIN = {
     document.body.appendChild(this.app.view);
 
     // runtime
-    self.runtime = new lz_runtime.LzRuntime();
-    self.runtime.app = self.app;
-    self.runtime.app.ticker.maxFPS = 60;
+    self.runtime = new lz_runtime.LzRuntime(self.app);
 
     // root game object
-    self.runtime.rootGo = new lz_game_object.LzGameObject(self.runtime);
-    self.app.stage.addChild(self.runtime.rootGo);
 
     // home menu
-    var home_menu = new HomeMenu(self.runtime);
-    self.runtime.rootGo.addChild(home_menu);
+    self.runtime.setScene(new HomeMenu(self.runtime));
 
     // window.addEventListener("resize",()=>{self.onresize();});
     // this.onresize();

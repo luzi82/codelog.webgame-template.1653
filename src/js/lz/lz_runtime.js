@@ -3,9 +3,14 @@
 export const LzRuntime = (function(){
 
 class LzRuntime {
-  constructor(){
-    this.actBusy = false;
-    this.app = null;
+  constructor(app){
+    const self=this;
+    self.actBusy = false;
+    self.app = app;
+    
+    self.app.ticker.maxFPS = 60;
+    
+    self.scene = null;
   };
   
   act(func,callback=null){
@@ -29,6 +34,18 @@ class LzRuntime {
     });
     
     return true;
+  };
+
+  setScene(scene){
+    const self=this;
+    if(self.scene!=null){
+      self.scene.destroy();
+      self.scene = null;
+    }
+    if(scene!=null){
+      self.scene = scene;
+      self.app.stage.addChild(self.scene);
+    }
   };
 };
 
