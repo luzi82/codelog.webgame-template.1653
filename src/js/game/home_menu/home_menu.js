@@ -14,7 +14,7 @@ class HomeMenu extends lz_game_object.LzGameObject {
     super(runtime);
     const self = this;
     
-    self.testBtn = new HomeMenuBtn();
+    self.testBtn = new HomeMenuBtn(self.runtime);
     self.addChild(self.testBtn);
   };
 
