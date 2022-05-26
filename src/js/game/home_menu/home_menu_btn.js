@@ -17,31 +17,84 @@ class HomeMenuBtn extends lz_game_object.LzGameObject {
     self.graphics.beginFill(0xFFFFFF);
     self.graphics.drawRect(0,0,100,100);
     self.graphics.endFill();
-    self.graphics.tint = 0x00FFFF;
     self.addChild(self.graphics);
     
     self.interactive = true;
     self.hitArea = new PIXI.Rectangle(0,0,100,100);
-    self.mousedown = function(ev){self.onMouseDown();};
-    self.mouseover = function(ev){self.onMouseOver();};
-    self.mouseout  = function(ev){self.onMouseOut();};
+    self.mousedown      = function(ev){self.onMouseDown();};
+    self.mouseup        = function(ev){self.onMouseUp();};
+    self.mouseupoutside = function(ev){self.onMouseUpOutside();};
+    self.mouseover      = function(ev){self.onMouseOver();};
+    self.mouseout       = function(ev){self.onMouseOut();};
+    
+    self.isDisabled = false;
+    self.isOver = false;
+    self.isDown = false;
+    self.isFired = false;
+    self.onStateUpdate();
   };
 
   onMouseDown() {
     const self=this;
-    console.log("QUZLBKIT");
+    console.log(`HomeMenuBtn.onMouseDown, self.uuid}=${self.uuid}`);
+    self.isDown = true;
+    self.onStateUpdate();
+  };
+
+  onMouseUp() {
+    const self=this;
+    console.log(`HomeMenuBtn.onMouseUp, self.uuid}=${self.uuid}`);
+    self.isDown = false;
+    self.onStateUpdate();
+  };
+
+  onMouseUpOutside() {
+    const self=this;
+    console.log(`HomeMenuBtn.onMouseUpOutside, self.uuid}=${self.uuid}`);
+    self.isDown = false;
+    self.onStateUpdate();
   };
 
   onMouseOver() {
-    console.log("onMouseOver");
     const self=this;
-    self.graphics.tint = 0xFFFF00;
+    //console.log(`HomeMenuBtn.onMouseOver, self.uuid}=${self.uuid}`);
+    self.isOver = true;
+    self.onStateUpdate();
   };
 
   onMouseOut() {
-    console.log("onMouseOut");
     const self=this;
-    self.graphics.tint = 0x00FFFF;
+    //console.log(`HomeMenuBtn.onMouseOut, self.uuid}=${self.uuid}`);
+    self.isOver = false;
+    self.onStateUpdate();
+  };
+
+  onStateUpdate() {
+    const self=this;
+    if(self.isDisabled){
+      self.graphics.tint = 0x7F7F7F;
+      return;
+    }
+    if(self.isFired){
+      self.graphics.tint = 0x0000FF;
+      return;
+    }
+    if((!self.isOver)&&(!self.isDown)){
+      self.graphics.tint = 0x00FF00;
+      return;
+    }
+    if((!self.isOver)&&(self.isDown)){
+      self.graphics.tint = 0x00FFFF;
+      return;
+    }
+    if((self.isOver)&&(!self.isDown)){
+      self.graphics.tint = 0xFFFF00;
+      return;
+    }
+    if((self.isOver)&&(self.isDown)){
+      self.graphics.tint = 0xFF0000;
+      return;
+    }
   };
 
 };
